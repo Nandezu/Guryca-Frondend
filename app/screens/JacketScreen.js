@@ -164,7 +164,7 @@ const JacketScreen = () => {
         return array;
       };
   
-      if (!lastShuffleTime || now - parseInt(lastShuffleTime) > 24 * 60 * 60 * 1000 || !cachedProducts) {
+      if (!lastShuffleTime || now - parseInt(lastShuffleTime) > 1 * 60 * 1000 || !cachedProducts) {
         console.log("Fetching all products and selecting new random set");
         const response = await axios.get(`${BASE_URL}/products/`, {
           headers: { 'Authorization': `Token ${userToken}` },

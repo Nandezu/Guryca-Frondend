@@ -2,7 +2,7 @@
   "expo": {
     "name": "Nandefrond",
     "slug": "Nandefrond",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "nandefrond",
@@ -20,8 +20,8 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.yourcompany.nandefrond",
-      "buildNumber": "1.0.0",
+      "bundleIdentifier": "com.nandezu.nandefrond",
+      "buildNumber": "1.0.1",
       "infoPlist": {
         "NSPhotoLibraryUsageDescription": "Allow Nandefrond to access your photos.",
         "NSPhotoLibraryAddUsageDescription": "Allow Nandefrond to save photos.",
@@ -33,8 +33,8 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.yourcompany.nandefrond",
-      "versionCode": 1,
+      "package": "com.nandezu.nandefrond",
+      "versionCode": 2,
       "permissions": [
         "android.permission.CAMERA",
         "android.permission.READ_EXTERNAL_STORAGE",

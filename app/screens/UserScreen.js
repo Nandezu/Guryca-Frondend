@@ -4,6 +4,7 @@ import { useNavigation, useRoute, useFocusEffect } from '@react-navigation/nativ
 import axios from 'axios';
 import { getToken } from '@/auth';
 import { BASE_URL } from '@config';
+import { useProfile } from '../../ProfileProvider';
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
@@ -22,8 +23,9 @@ const UserScreen = () => {
   const flatListRef = useRef(null);
   const [profileImageUrl, setProfileImageUrl] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [profiles, setProfiles] = useState([]);
-  const [selectedProfileIndex, setSelectedProfileIndex] = useState(0);
+
+  // Použití ProfileProvider
+  const { profiles, setProfiles, selectedProfileIndex, setSelectedProfileIndex } = useProfile();
 
   useFocusEffect(
     useCallback(() => {
@@ -57,7 +59,7 @@ const UserScreen = () => {
       };
 
       loadData();
-    }, [userId, route.params?.deletedItemId])
+    }, [userId, route.params?.deletedItemId, setProfiles])
   );
 
   useEffect(() => {
@@ -69,7 +71,7 @@ const UserScreen = () => {
         viewPosition: 0.5
       });
     }
-  }, [route.params?.selectedProfileIndex]);
+  }, [route.params?.selectedProfileIndex, setSelectedProfileIndex]);
 
   const loadProfileImage = async () => {
     try {
@@ -447,7 +449,7 @@ const styles = StyleSheet.create({
   },
   nandezuImage: {
     width: SCREEN_WIDTH * 0.35,
-    height: SCREEN_HEIGHT * 0.16,
+    height: SCREEN_HEIGHT * 0.16
   },
   nandezuButton: {
     width: SCREEN_WIDTH * 0.35,
