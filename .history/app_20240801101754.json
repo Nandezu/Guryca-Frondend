@@ -1,0 +1,82 @@
+{
+  "expo": {
+    "name": "Nandefrond",
+    "slug": "Nandefrond",
+    "version": "1.0.1",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "nandefrond",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/images/nandezus.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#000000"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.nandezu.nandefrond",
+      "buildNumber": "1.0.1",
+      "infoPlist": {
+        "NSPhotoLibraryUsageDescription": "Allow Nandefrond to access your photos.",
+        "NSPhotoLibraryAddUsageDescription": "Allow Nandefrond to save photos.",
+        "NSCameraUsageDescription": "Allow Nandefrond to use your camera."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.nandezu.nandefrond",
+      "versionCode": 2,
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.ACCESS_MEDIA_LOCATION",
+        "android.permission.RECORD_AUDIO"
+      ]
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/images/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "Allow Nandefrond to access your photos.",
+          "savePhotosPermission": "Allow Nandefrond to save photos.",
+          "isAccessMediaLocationEnabled": true
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Allow Nandefrond to access your photos."
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "e1074de5-be6d-4099-b214-f3e1eb6f1dea"
+      }
+    }
+  }
+}
