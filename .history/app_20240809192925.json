@@ -1,0 +1,120 @@
+{
+  "expo": {
+    "name": "Nandezu",
+    "slug": "Nandefrond",
+    "version": "1.0.2",
+    "orientation": "portrait",
+    "icon": "./assets/images/loco.png",
+    "scheme": "nandefrond",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/images/nandezus.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#000000"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.nandezu.nandefrond",
+      "buildNumber": "1.0.2",
+      "infoPlist": {
+        "NSPhotoLibraryUsageDescription": "Allow Nandezu to access your photos.",
+        "NSPhotoLibraryAddUsageDescription": "Allow Nandezu to save photos.",
+        "NSCameraUsageDescription": "Allow Nandezu to use your camera."
+      },
+      "config": {
+        "usesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/loco.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.nandezu.nandefrond",
+      "versionCode": 3,
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.ACCESS_MEDIA_LOCATION",
+        "android.permission.RECORD_AUDIO",
+        "com.android.vending.BILLING"
+      ]
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/images/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "Allow Nandezu to access your photos.",
+          "savePhotosPermission": "Allow Nandezu to save photos.",
+          "isAccessMediaLocationEnabled": true
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Allow Nandezu to access your photos."
+        }
+      ],
+      [
+        "expo-in-app-purchases"
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "e1074de5-be6d-4099-b214-f3e1eb6f1dea"
+      },
+      "subscription": {
+        "baseUrl": "https://app-tdh1.onrender.com",
+        "endpoints": {
+          "details": "/subscription/details/",
+          "cancel": "/subscription/cancel/",
+          "purchase": "/subscription/purchase/",
+          "useFeature": "/subscription/use_feature/",
+          "change": "/subscription/change/",
+          "plans": "/subscription/plans/",
+          "manualUpdate": "/subscription/manual_update/",
+          "verifyPurchase": "/verify_purchase/",
+          "verifyApplePurchase": "/verify_apple_purchase/",
+          "verifyGooglePurchase": "/verify_google_purchase/"
+        },
+        "products": {
+          "ios": {
+            "BASIC_MONTHLY": "com.nandezu.basic_monthly",
+            "PRO_MONTHLY": "com.nandezu.promonthly",
+            "PREMIUM_MONTHLY": "com.nandezu.premiummonthly",
+            "BASIC_ANNUAL": "com.nandezu.basicannual",
+            "PRO_ANNUAL": "com.nandezu.proannual",
+            "PREMIUM_ANNUAL": "com.nandezu.premiumannual"
+          },
+          "android": {
+            "BASIC_MONTHLY": "com.nandezu.basic_monthly_android",
+            "PRO_MONTHLY": "com.nandezu.promonthly_android",
+            "PREMIUM_MONTHLY": "com.nandezu.premiummonthly_android",
+            "BASIC_ANNUAL": "com.nandezu.basicannual_android",
+            "PRO_ANNUAL": "com.nandezu.proannual_android",
+            "PREMIUM_ANNUAL": "com.nandezu.premiumannual_android"
+          }
+        }
+      }
+    }
+  }
+}
