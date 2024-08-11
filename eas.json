@@ -22,16 +22,16 @@
         "gradleCommand": ":app:bundleRelease"
       },
       "ios": {
-        "distribution": "store"
+        "distribution": "store",
+        "buildNumber": "1.0.5"
       }
     }
   },
   "submit": {
     "production": {
       "ios": {
-        "appleId": "YOUR_APPLE_ID",
-        "ascAppId": "YOUR_APP_STORE_CONNECT_APP_ID",
-        "appleTeamId": "YOUR_APPLE_TEAM_ID"
+        "appleId": "tguryca@gmail.com",
+        "ascAppId": "6599850169"
       },
       "android": {
         "serviceAccountKeyPath": "path/to/your/google-service-account.json"
