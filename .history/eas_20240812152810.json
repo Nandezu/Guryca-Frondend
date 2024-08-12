@@ -22,7 +22,8 @@
         "gradleCommand": ":app:bundleRelease"
       },
       "ios": {
-        "distribution": "store"
+        "distribution": "store",
+        "buildNumber": "1.0.6"
       }
     }
   },
@@ -33,7 +34,7 @@
         "ascAppId": "6599850169"
       },
       "android": {
-        "serviceAccountKeyPath": "./google-services-config.json"
+        "serviceAccountKeyPath": "path/to/your/google-service-account.json"
       }
     }
   }

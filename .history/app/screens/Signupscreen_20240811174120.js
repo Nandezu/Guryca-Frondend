@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Switch, ScrollView, Linking, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Switch, ScrollView, Linking } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 export default function SignUpScreen() {
@@ -9,6 +9,7 @@ export default function SignUpScreen() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [agreedToTerms, setAgreedToTerms] = useState(false);
+  const [message, setMessage] = useState('');
 
   const validatePassword = (password) => {
     const hasNumber = /\d/;
@@ -18,32 +19,32 @@ export default function SignUpScreen() {
 
   const handleContinue = () => {
     if (!nickname || !email || !password || !confirmPassword) {
-      Alert.alert('Chyba', 'Všechna pole jsou povinná.');
+      setMessage('Všechna pole jsou povinná.');
       return;
     }
 
     if (nickname.length > 20) {
-      Alert.alert('Chyba', 'Uživatelské jméno nemůže být delší než 20 znaků.');
+      setMessage('Uživatelské jméno nemůže být delší než 20 znaků.');
       return;
     }
 
     if (!/\S+@\S+\.\S+/.test(email)) {
-      Alert.alert('Chyba', 'Neplatný formát e-mailu.');
+      setMessage('Neplatný formát e-mailu.');
       return;
     }
 
     if (!validatePassword(password)) {
-      Alert.alert('Chyba', 'Heslo musí mít alespoň 7 znaků, obsahovat číslo a velké písmeno.');
+      setMessage('Heslo musí mít alespoň 7 znaků, obsahovat číslo a velké písmeno.');
       return;
     }
 
     if (password !== confirmPassword) {
-      Alert.alert('Chyba', 'Hesla se neshodují.');
+      setMessage('Hesla se neshodují.');
       return;
     }
 
     if (!agreedToTerms) {
-      Alert.alert('Chyba', 'Musíte souhlasit s podmínkami použití.');
+      setMessage('Musíte souhlasit s podmínkami použití.');
       return;
     }
 
@@ -62,7 +63,7 @@ export default function SignUpScreen() {
         <View style={[styles.circle, styles.circleInner]} />
       </View>
       <Text style={styles.appName}>NANDEZU</Text>
-      <Text style={styles.subtitle}>Your First AI-Powered Fashion Assistant</Text>
+      <Text style={styles.subtitle}>Váš první AI módní asistent</Text>
 
       <View style={styles.inputContainer}>
         <TextInput
@@ -119,22 +120,20 @@ export default function SignUpScreen() {
           trackColor={{ false: '#565656', true: '#07FBF2' }}
         />
         <Text style={styles.termsText}>
-          I agree to{' '}
+          Souhlasím s{' '}
           <Text style={styles.link} onPress={() => Linking.openURL('https://www.nandezu.com/terms-and-conditions')}>
-            the terms and conditions
+            podmínkami použití
           </Text>
         </Text>
       </View>
 
+      {message ? <Text style={styles.message}>{message}</Text> : null}
+
       <TouchableOpacity style={styles.continueButton} onPress={handleContinue}>
-        <Text style={styles.buttonText}>Continue</Text>
+        <Text style={styles.buttonText}>Pokračovat</Text>
       </TouchableOpacity>
 
-      <View style={styles.loginContainer}>
-        <TouchableOpacity onPress={() => navigation.navigate('LoginScreen')}>
-          <Text style={styles.textButton}>Already have an account? Login</Text>
-        </TouchableOpacity>
-      </View>
+      
     </ScrollView>
   );
 }
@@ -233,13 +232,14 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#000',
     fontSize: 18,
+  
   },
-  loginContainer: {
-    width: '80%',
-    alignItems: 'center',
-  },
-  textButton: {
-    color: '#000',
+  
+  message: {
+    color: 'red',
     fontSize: 14,
+    marginBottom: 20,
+    textAlign: 'center',
+    width: '80%',
   },
 });

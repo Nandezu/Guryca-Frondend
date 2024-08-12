@@ -2,7 +2,7 @@
   "expo": {
     "name": "Nandezu",
     "slug": "Nandefrond",
-    "version": "1.0.6",
+    "version": "1.0.5",
     "orientation": "portrait",
     "icon": "./assets/images/loco.png",
     "scheme": "nandefrond",
@@ -21,7 +21,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.nandezu.nandefrond",
-      "buildNumber": "1.0.6",
+      "buildNumber": "1.0.5",
       "infoPlist": {
         "NSPhotoLibraryUsageDescription": "Allow Nandezu to access your photos.",
         "NSPhotoLibraryAddUsageDescription": "Allow Nandezu to save photos.",
@@ -35,7 +35,7 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.nandezu.nandefrond",
-      "versionCode": 6,
+      "versionCode": 5,
       "permissions": [
         "android.permission.CAMERA",
         "android.permission.READ_EXTERNAL_STORAGE",

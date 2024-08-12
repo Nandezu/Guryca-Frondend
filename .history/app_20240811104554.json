@@ -2,7 +2,7 @@
   "expo": {
     "name": "Nandezu",
     "slug": "Nandefrond",
-    "version": "1.0.6",
+    "version": "1.0.4",
     "orientation": "portrait",
     "icon": "./assets/images/loco.png",
     "scheme": "nandefrond",
@@ -21,12 +21,15 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.nandezu.nandefrond",
-      "buildNumber": "1.0.6",
+      "buildNumber": "1.0.4",
       "infoPlist": {
         "NSPhotoLibraryUsageDescription": "Allow Nandezu to access your photos.",
         "NSPhotoLibraryAddUsageDescription": "Allow Nandezu to save photos.",
         "NSCameraUsageDescription": "Allow Nandezu to use your camera.",
         "SKStoreKitEnabled": true
+      },
+      "config": {
+        "usesNonExemptEncryption": false
       }
     },
     "android": {
@@ -35,7 +38,7 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.nandezu.nandefrond",
-      "versionCode": 6,
+      "versionCode": 4,
       "permissions": [
         "android.permission.CAMERA",
         "android.permission.READ_EXTERNAL_STORAGE",
@@ -45,7 +48,9 @@
       ]
     },
     "web": {
-      "favicon": "./assets/images/favicon.png"
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/images/loco.png"
     },
     "plugins": [
       "expo-router",
@@ -66,12 +71,48 @@
       "react-native-iap",
       "expo-dev-client"
     ],
+    "experiments": {
+      "typedRoutes": true
+    },
     "extra": {
       "router": {
         "origin": false
       },
       "eas": {
         "projectId": "e1074de5-be6d-4099-b214-f3e1eb6f1dea"
+      },
+      "subscription": {
+        "baseUrl": "https://app-tdh1.onrender.com",
+        "endpoints": {
+          "details": "/subscription/details/",
+          "cancel": "/subscription/cancel/",
+          "purchase": "/subscription/purchase/",
+          "useFeature": "/subscription/use_feature/",
+          "change": "/subscription/change/",
+          "plans": "/subscription/plans/",
+          "manualUpdate": "/subscription/manual_update/",
+          "verifyPurchase": "/verify_purchase/",
+          "verifyApplePurchase": "/verify_apple_purchase/",
+          "verifyGooglePurchase": "/verify_google_purchase/"
+        },
+        "products": {
+          "ios": {
+            "BASIC_MONTHLY": "com.nandezu.basic_monthly",
+            "PRO_MONTHLY": "com.nandezu.promonthly",
+            "PREMIUM_MONTHLY": "com.nandezu.premiummonthly",
+            "BASIC_ANNUAL": "com.nandezu.basicannual",
+            "PRO_ANNUAL": "com.nandezu.proannual",
+            "PREMIUM_ANNUAL": "com.nandezu.premiumannual"
+          },
+          "android": {
+            "BASIC_MONTHLY": "com.nandezu.basic_monthly_android",
+            "PRO_MONTHLY": "com.nandezu.promonthly_android",
+            "PREMIUM_MONTHLY": "com.nandezu.premiummonthly_android",
+            "BASIC_ANNUAL": "com.nandezu.basicannual_android",
+            "PRO_ANNUAL": "com.nandezu.proannual_android",
+            "PREMIUM_ANNUAL": "com.nandezu.premiumannual_android"
+          }
+        }
       }
     }
   }

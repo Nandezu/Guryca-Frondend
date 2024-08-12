@@ -45,9 +45,15 @@ const SubScreen = () => {
   const [userSubscription, setUserSubscription] = useState(null);
   const [isCancelled, setIsCancelled] = useState(false);
   const [showCancelButton, setShowCancelButton] = useState(true);
-  const [availablePlans, setAvailablePlans] = useState([]);
 
   console.log('SubScreen - Received userId:', userId);
+
+  const plans = [
+    { image: require('../../assets/images/freeplan.png'), name: 'Free Plan', isFree: true },
+    { image: require('../../assets/images/basicplan.png'), name: 'Basic Plan', isFree: false },
+    { image: require('../../assets/images/proplan.png'), name: 'Pro Plan', isFree: false },
+    { image: require('../../assets/images/premiumplan.png'), name: 'Premium Plan', isFree: false },
+  ];
 
   useEffect(() => {
     const initializeIAP = async () => {
@@ -64,24 +70,11 @@ const SubScreen = () => {
     };
 
     initializeIAP();
-    fetchAvailablePlans();
 
     return () => {
       RNIap.endConnection();
     };
   }, []);
-
-  const fetchAvailablePlans = async () => {
-    try {
-      const token = await getToken();
-      const response = await axios.get(`${BASE_URL}/subscription/plans/`, {
-        headers: { Authorization: `Token ${token}` }
-      });
-      setAvailablePlans(response.data);
-    } catch (error) {
-      handleError(error, 'Failed to fetch available plans');
-    }
-  };
 
   const fetchSubscriptionDetails = useCallback(async () => {
     try {
@@ -109,7 +102,7 @@ const SubScreen = () => {
 
       await AsyncStorage.setItem('lastSubscription', newSubscription);
     } catch (error) {
-      handleError(error, 'Error fetching subscription details');
+      console.error('Error fetching subscription details:', error);
     }
   }, [updateSubscriptionLimits]);
 
@@ -152,7 +145,8 @@ const SubScreen = () => {
               await AsyncStorage.setItem('showCancelButton', 'false');
               fetchSubscriptionDetails();
             } catch (error) {
-              handleError(error, 'Failed to cancel subscription');
+              console.error('Error cancelling subscription:', error);
+              Alert.alert('Error', 'Failed to cancel subscription. Please try again.');
             }
           }
         }
@@ -164,6 +158,7 @@ const SubScreen = () => {
     try {
       const device = Platform.OS;
       
+      // Určení správného produktového ID
       let productId;
       const productPlatform = device === 'ios' ? SUBSCRIPTION_PRODUCTS.iOS : SUBSCRIPTION_PRODUCTS.android;
       switch (planType.toLowerCase()) {
@@ -180,25 +175,30 @@ const SubScreen = () => {
           throw new Error('Invalid plan type');
       }
 
+      // Zahájení nákupu
       const purchase = await RNIap.requestSubscription({
         sku: productId,
         andDangerouslyFinishTransactionAutomaticallyIOS: false,
       });
 
       if (purchase) {
+        // Nákup byl úspěšný, nyní ověřte nákup na serveru
         await verifyPurchase(productId, purchase);
         
+        // Dokončení transakce
         if (Platform.OS === 'ios') {
           await RNIap.finishTransactionIOS(purchase.transactionId);
         } else {
           await RNIap.acknowledgePurchaseAndroid(purchase.purchaseToken);
         }
       } else {
+        // Nákup selhal nebo byl zrušen uživatelem
         Alert.alert('Purchase Failed', 'The subscription purchase was not completed.');
       }
     } catch (error) {
+      console.error('Error initiating subscription:', error);
       if (error.code !== 'E_USER_CANCELLED') {
-        handleError(error, 'An error occurred while processing your request');
+        Alert.alert('Error', 'An error occurred while processing your request.');
       }
     }
   };
@@ -209,62 +209,21 @@ const SubScreen = () => {
       const verificationResponse = await axios.post(`${BASE_URL}/verify-purchase/`, {
         product_id: productId,
         receipt: purchase.transactionReceipt,
-        transaction_id: purchase.transactionId,
-        is_ios: Platform.OS === 'ios'
+        transaction_id: purchase.transactionId
       }, {
         headers: { Authorization: `Token ${token}` }
       });
 
       if (verificationResponse.data.success) {
         Alert.alert('Success', 'Your subscription has been activated!');
-        await fetchSubscriptionDetails();
+        await fetchSubscriptionDetails(); // Aktualizujte informace o předplatném
       } else {
-        throw new Error('Failed to verify purchase');
+        Alert.alert('Error', 'Failed to verify purchase. Please contact support.');
       }
     } catch (error) {
-      handleError(error, 'Failed to verify purchase. Please try again or contact support.');
+      console.error('Error verifying purchase:', error);
+      Alert.alert('Error', 'Failed to verify purchase. Please try again or contact support.');
     }
-  };
-
-  const handleChangeSubscription = async (newPlanType, duration) => {
-    try {
-      const token = await getToken();
-      const response = await axios.post(`${BASE_URL}/subscription/change/`, {
-        new_product_id: getProductId(newPlanType, duration),
-        is_ios: Platform.OS === 'ios'
-      }, {
-        headers: { Authorization: `Token ${token}` }
-      });
-
-      if (response.data.success) {
-        Alert.alert('Success', 'Your subscription has been changed successfully!');
-        await fetchSubscriptionDetails();
-      } else {
-        throw new Error('Failed to change subscription');
-      }
-    } catch (error) {
-      handleError(error, 'An error occurred while changing your subscription');
-    }
-  };
-
-  const getProductId = (planType, duration) => {
-    const productPlatform = Platform.OS === 'ios' ? SUBSCRIPTION_PRODUCTS.iOS : SUBSCRIPTION_PRODUCTS.android;
-    switch (planType.toLowerCase()) {
-      case 'basic plan':
-        return duration === 'monthly' ? productPlatform.BASIC_MONTHLY : productPlatform.BASIC_ANNUAL;
-      case 'pro plan':
-        return duration === 'monthly' ? productPlatform.PRO_MONTHLY : productPlatform.PRO_ANNUAL;
-      case 'premium plan':
-        return duration === 'monthly' ? productPlatform.PREMIUM_MONTHLY : productPlatform.PREMIUM_ANNUAL;
-      default:
-        throw new Error('Invalid plan type');
-    }
-  };
-
-  const handleError = (error, defaultMessage) => {
-    console.error(error);
-    const errorMessage = error.response?.data?.error || error.message || defaultMessage;
-    Alert.alert('Error', errorMessage);
   };
 
   const isCurrentOrAnnualPlan = (planName) => {
@@ -339,7 +298,7 @@ const SubScreen = () => {
         showsHorizontalScrollIndicator={false}
         style={styles.scrollView}
       >
-        {availablePlans.map((plan, index) => (
+        {plans.map((plan, index) => (
           <View key={index} style={styles.planWrapper}>
             {renderPlanImage(plan, index)}
             {renderButtons(plan)}
