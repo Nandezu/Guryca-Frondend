@@ -1,0 +1,78 @@
+{
+  "expo": {
+    "name": "Nandezu",
+    "slug": "Nandefrond",
+    "version": "1.0.6",
+    "orientation": "portrait",
+    "icon": "./assets/images/loco.png",
+    "scheme": "nandefrond",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/images/nandezus.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#000000"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.nandezu.nandefrond",
+      "buildNumber": "1.0.7",
+      "infoPlist": {
+        "NSPhotoLibraryUsageDescription": "Allow Nandezu to access your photos.",
+        "NSPhotoLibraryAddUsageDescription": "Allow Nandezu to save photos.",
+        "NSCameraUsageDescription": "Allow Nandezu to use your camera.",
+        "SKStoreKitEnabled": true
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/loco.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.nandezu.nandefrond",
+      "versionCode": 7,
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.ACCESS_MEDIA_LOCATION",
+        "com.android.vending.BILLING"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/images/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "Allow Nandezu to access your photos.",
+          "savePhotosPermission": "Allow Nandezu to save photos.",
+          "isAccessMediaLocationEnabled": true
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Allow Nandezu to access your photos."
+        }
+      ],
+      "react-native-iap",
+      "expo-dev-client"
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "e1074de5-be6d-4099-b214-f3e1eb6f1dea"
+      }
+    }
+  }
+}
