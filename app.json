@@ -21,7 +21,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.nandezu.nandefrond",
-      "buildNumber": "1.1.1",
+      "buildNumber": "1.1.2",
       "minimumOSVersion": "12.0",
       "infoPlist": {
         "NSPhotoLibraryUsageDescription": "Allow Nandezu to access your photos.",
@@ -39,7 +39,7 @@
       },
       "icon": "./assets/images/ic_launcher.png",
       "package": "com.nandezu.nandefrond",
-      "versionCode": 11,
+      "versionCode": 12,
       "permissions": [
         "android.permission.CAMERA",
         "android.permission.READ_EXTERNAL_STORAGE",
