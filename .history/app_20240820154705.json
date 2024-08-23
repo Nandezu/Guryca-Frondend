@@ -1,0 +1,114 @@
+{
+  "expo": {
+    "name": "Nandezu",
+    "slug": "Nandefrond",
+    "version": "1.1.8",
+    "orientation": "portrait",
+    "icon": "./assets/images/ic_launcher.png",
+    "scheme": "nandefrond",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/images/nandezus.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#000000"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/e1074de5-be6d-4099-b214-f3e1eb6f1dea"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.nandezu.nandefrond",
+      "buildNumber": "1.1.8",
+      "minimumOSVersion": "13.0",
+      "infoPlist": {
+        "NSPhotoLibraryUsageDescription": "Allow Nandezu to access your photos.",
+        "NSPhotoLibraryAddUsageDescription": "Allow Nandezu to save photos.",
+        "NSCameraUsageDescription": "Allow Nandezu to use your camera.",
+        "SKStoreKitEnabled": true,
+        "UIRequiredDeviceCapabilities": [
+          "arm64"
+        ]
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/ic_launcher_foreground.png",
+        "backgroundImage": "./assets/images/ic_launcher_background.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "icon": "./assets/images/ic_launcher.png",
+      "package": "com.nandezu.nandefrond",
+      "versionCode": 18,
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.ACCESS_MEDIA_LOCATION",
+        "com.android.vending.BILLING"
+      ],
+      "screenSize": [
+        "small",
+        "normal",
+        "large"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/images/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-dev-client",
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "Allow Nandezu to access your photos.",
+          "savePhotosPermission": "Allow Nandezu to save photos.",
+          "isAccessMediaLocationEnabled": true
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Allow Nandezu to access your photos."
+        }
+      ],
+      "react-native-iap",
+      [
+        "sentry-expo",
+        {
+          "organization": "nandezu-inc",
+          "project": "react-native"
+        }
+      ]
+    ],
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "sentry-expo/upload-sourcemaps",
+          "config": {
+            "organization": "nandezu-inc",
+            "project": "react-native"
+          }
+        }
+      ]
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "e1074de5-be6d-4099-b214-f3e1eb6f1dea"
+      }
+    },
+    "developmentClient": {
+      "silentLaunch": false
+    },
+    "runtimeVersion": "1.0.0" 
+      
+    
+  }
+}
